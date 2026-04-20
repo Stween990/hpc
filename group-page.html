@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Libertas et Orde — Página del Grupo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg-deep:     #07080f;
+    --bg-mid:      #0d0f1f;
+    --bg-card:     #0f1128;
+    --purple-dark: #1a1040;
+    --purple:      #3d2080;
+    --purple-glow: #6637d6;
+    --gold:        #c9a84c;
+    --gold-light:  #e8c96e;
+    --gold-dim:    #7a6028;
+    --silver:      #b0b8cc;
+    --text:        #ddd5ee;
+    --text-dim:    #7a7494;
+    --green-house: #0e2040;
+    --green-glow:  #4a8fd4;
+    --red-house:   #3d1010;
+    --red-glow:    #d94040;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-deep);
+    color: var(--text);
+    font-family: 'EB Garamond', Georgia, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* golden shimmer stars */
+  .starfield::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(2px 2px at 20% 15%, rgba(201,168,76,0.7) 0%, transparent 100%),
+      radial-gradient(2px 2px at 65% 5%,  rgba(201,168,76,0.5) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 25%, rgba(201,168,76,0.6) 0%, transparent 100%),
+      radial-gradient(2px 2px at 10% 70%, rgba(201,168,76,0.4) 0%, transparent 100%),
+      radial-gradient(2px 2px at 48% 40%, rgba(201,168,76,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 75% 80%, rgba(201,168,76,0.4) 0%, transparent 100%),
+      radial-gradient(2px 2px at 30% 60%, rgba(232,201,110,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 92% 55%, rgba(201,168,76,0.4) 0%, transparent 100%);
+    animation: twinkle 4s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle {
+    0%   { opacity: 0.4; }
+    50%  { opacity: 1; }
+    100% { opacity: 0.6; }
+  }
+
+  /* ambient glow blobs */
+  .glow-orb {
+    position: fixed; border-radius: 50%; pointer-events: none; z-index: 0;
+    filter: blur(80px);
+  }
+  .glow-orb-1 {
+    width: 500px; height: 300px;
+    top: -100px; left: 50%; transform: translateX(-50%);
+    background: rgba(61,32,128,0.35);
+    animation: drift 8s ease-in-out infinite alternate;
+  }
+  .glow-orb-2 {
+    width: 300px; height: 300px;
+    top: 40%; right: -80px;
+    background: rgba(74,143,212,0.1);
+    animation: drift 12s ease-in-out infinite alternate-reverse;
+  }
+  .glow-orb-3 {
+    width: 250px; height: 250px;
+    bottom: 10%; left: -60px;
+    background: rgba(201,168,76,0.07);
+    animation: drift 10s ease-in-out infinite alternate;
+  }
+  @keyframes drift {
+    from { transform: translateY(0) scale(1); }
+    to   { transform: translateY(30px) scale(1.1); }
+  }
+
+  /* ─── Starfield ─── */
+  .starfield {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(ellipse 90% 70% at 50% -10%, rgba(61,32,128,0.45) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 50% at 10% 50%, rgba(30,15,80,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 85% 100%, rgba(10,5,30,0.7) 0%, transparent 70%);
+  }
+  .starfield::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,0.9) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 8%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 30%, rgba(255,255,255,0.9) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 78% 12%, rgba(255,245,180,0.9) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 45%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 65%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 45% 55%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 68% 72%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 88%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 90%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 12% 42%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 28% 35%, rgba(255,240,150,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 72% 60%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(2px 2px at 55% 15%, rgba(255,245,180,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 8% 28%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 93% 22%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 40% 75%, rgba(255,240,150,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 82% 38%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 18% 92%, rgba(255,255,255,0.3) 0%, transparent 100%);
+  }
+
+  /* ─── Wrapper ─── */
+  .wrapper {
+    position: relative; z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+
+  /* ─── Header / Banner ─── */
+  .banner {
+    text-align: center;
+    padding: 48px 24px 40px;
+    position: relative;
+    margin-bottom: 48px;
+    animation: fadeDown 0.8s ease both;
+  }
+  .banner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 100% at 50% 50%, rgba(61,32,128,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* ornate rule */
+  .ornate-rule {
+    display: flex; align-items: center; gap: 16px;
+    margin: 0 auto 20px;
+    max-width: 600px;
+  }
+  .ornate-rule::before, .ornate-rule::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .ornate-rule span {
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+
+  .group-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 12px;
+  }
+  .group-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 700;
+    color: var(--gold-light);
+    text-shadow: 0 0 40px rgba(201,168,76,0.4), 0 0 80px rgba(201,168,76,0.15);
+    line-height: 1.1;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+  .group-motto {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--silver);
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+  }
+  .house-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 20px;
+    padding: 6px 20px;
+    border: 1px solid var(--gold-dim);
+    border-radius: 2px;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201,168,76,0.06);
+  }
+
+  /* ─── Section Label ─── */
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    text-align: center;
+    margin-bottom: 28px;
+    animation: fadeUp 0.7s ease both;
+    animation-delay: 0.2s;
+  }
+
+  /* ─── Member Cards Row ─── */
+  .members-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 56px;
+  }
+
+  .member-card {
+    flex: 1 1 200px;
+    max-width: 230px;
+    background: linear-gradient(160deg, #10122a 0%, #0b0c1e 100%);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    animation: fadeUp 0.7s ease both;
+  }
+  .member-card:nth-child(1) { animation-delay: 0.1s; }
+  .member-card:nth-child(2) { animation-delay: 0.2s; }
+  .member-card:nth-child(3) { animation-delay: 0.3s; }
+  .member-card:nth-child(4) { animation-delay: 0.4s; }
+  .member-card:nth-child(5) { animation-delay: 0.5s; }
+
+  .member-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(201,168,76,0.65);
+    box-shadow: 0 16px 50px rgba(61,32,128,0.6), 0 0 30px rgba(201,168,76,0.18), 0 0 60px rgba(74,143,212,0.08);
+  }
+
+  /* top glow line */
+  .member-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .member-card:hover::before { opacity: 1; }
+
+  .card-avatar-wrap {
+    width: 100%;
+    aspect-ratio: 1/1;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1040 0%, #0a0820 100%);
+  }
+  .card-avatar-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(20%) contrast(1.05);
+    transition: filter 0.3s, transform 0.4s;
+  }
+  .member-card:hover .card-avatar-wrap img {
+    filter: grayscale(0%) contrast(1.1);
+    transform: scale(1.04);
+  }
+
+  /* placeholder avatar */
+  .avatar-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, rgba(61,32,128,0.4) 0%, rgba(10,8,30,0.8) 100%);
+    color: rgba(201,168,76,0.35);
+  }
+  .avatar-placeholder svg { opacity: 0.5; }
+  .avatar-placeholder span {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  .card-vignette {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 60%;
+    background: linear-gradient(to top, #0b0c1e 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .card-body {
+    padding: 16px 16px 18px;
+  }
+  .card-house-pip {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green-glow);
+    box-shadow: 0 0 6px var(--green-glow);
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .card-role {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 6px;
+  }
+  .card-name {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .card-username {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .card-divider {
+    height: 1px;
+    background: linear-gradient(to right, var(--gold-dim), transparent);
+    margin-bottom: 10px;
+    opacity: 0.4;
+  }
+  .card-desc {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--silver);
+    opacity: 0.85;
+  }
+
+  /* ─── Stats Table Section ─── */
+  .stats-section {
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.5s;
+  }
+
+  .table-wrap {
+    background: linear-gradient(160deg, #0f1128 0%, #090a1a 100%);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .table-wrap::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+    box-shadow: 0 0 12px rgba(201,168,76,0.4);
+  }
+
+  .table-header {
+    display: grid;
+    grid-template-columns: 120px 1fr 1fr 1fr 1fr;
+    padding: 12px 24px;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    background: rgba(61,32,128,0.15);
+  }
+  .th {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+
+  .table-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 1fr 1fr 1fr;
+    padding: 18px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    align-items: center;
+    transition: background 0.2s;
+  }
+  .table-row:last-child { border-bottom: none; }
+  .table-row:hover { background: rgba(61,32,128,0.12); }
+
+  .td { font-size: 14px; color: var(--text); }
+
+  /* Group name cell */
+  .cell-group {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .group-icon {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), #1a0f40);
+    border: 1px solid var(--gold-dim);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .group-label {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    color: var(--gold-light);
+    font-weight: 600;
+  }
+
+  /* Level cell */
+  .cell-level {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .level-num {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .level-label { font-size: 11px; color: var(--text-dim); }
+  .level-bar {
+    width: 80px; height: 4px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .level-bar-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--purple-glow), var(--gold));
+    border-radius: 2px;
+    transition: width 1s ease 0.8s;
+  }
+
+  /* Points cell */
+  .cell-points {
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .points-num {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .points-label { font-size: 11px; color: var(--text-dim); }
+
+  /* Rank cell */
+  .cell-rank {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .rank-badge {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold-light);
+  }
+  .rank-arrow { font-size: 13px; }
+  .rank-up { color: #2aad5a; }
+  .rank-down { color: #d94040; }
+  .rank-label { font-size: 11px; color: var(--text-dim); }
+
+  /* Quest cell */
+  .cell-quest {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .quest-name {
+    font-size: 13px;
+    color: var(--text);
+    font-style: italic;
+  }
+  .quest-bar {
+    width: 100%; height: 6px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .quest-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(to right, var(--purple-glow), var(--gold));
+    transition: width 1.2s ease 1s;
+  }
+  .quest-pct { font-size: 11px; color: var(--text-dim); }
+
+  /* ─── Achievements & Boosts ─── */
+  .ab-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 16px;
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.65s;
+  }
+
+  .ab-card {
+    background: linear-gradient(160deg, #0f1128 0%, #090a1a 100%);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 4px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ab-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .ab-title {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 18px;
+  }
+
+  .achievements-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .achievement {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 6px;
+    cursor: default;
+    transition: transform 0.2s;
+  }
+  .achievement:hover { transform: translateY(-3px); }
+  .ach-icon {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    border: 2px solid;
+    position: relative;
+  }
+  .ach-icon.gold {
+    background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+    border-color: var(--gold);
+    box-shadow: 0 0 14px rgba(201,168,76,0.25);
+  }
+  .ach-icon.silver {
+    background: radial-gradient(circle, rgba(176,184,204,0.1) 0%, transparent 70%);
+    border-color: var(--silver);
+    box-shadow: 0 0 14px rgba(176,184,204,0.15);
+  }
+  .ach-icon.purple {
+    background: radial-gradient(circle, rgba(102,55,214,0.2) 0%, transparent 70%);
+    border-color: var(--purple-glow);
+    box-shadow: 0 0 14px rgba(102,55,214,0.3);
+  }
+  .ach-icon.locked {
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.1);
+    filter: grayscale(1);
+    opacity: 0.35;
+  }
+  .ach-name {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    text-align: center;
+    max-width: 60px;
+    line-height: 1.3;
+  }
+
+  .boosts-list {
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .boost-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 2px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .boost-item:hover {
+    background: rgba(61,32,128,0.15);
+    border-color: rgba(201,168,76,0.2);
+  }
+  .boost-icon {
+    font-size: 20px;
+    width: 36px; text-align: center;
+    flex-shrink: 0;
+  }
+  .boost-info { flex: 1; }
+  .boost-name {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    color: var(--gold-light);
+    margin-bottom: 2px;
+  }
+  .boost-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+  .boost-timer {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: var(--green-glow);
+    flex-shrink: 0;
+    letter-spacing: 1px;
+  }
+  .boost-timer.expiring { color: #d98a40; }
+
+  /* ─── Animations ─── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── Adventure History ─── */
+  .hist-filter {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    color: var(--text-dim);
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .hist-filter:hover { border-color: rgba(201,168,76,0.4); color: var(--gold); }
+  .hist-filter.active { background: rgba(201,168,76,0.12); border-color: var(--gold-dim); color: var(--gold-light); }
+
+  .hist-row {
+    display: grid;
+    grid-template-columns: 36px 1fr 110px 90px 100px;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.2s;
+  }
+  .hist-row:last-child { border-bottom: none; }
+  .hist-row:hover { background: rgba(61,32,128,0.12); }
+
+  .hist-num { font-family:'Cinzel',serif; font-size:11px; color:var(--text-dim); text-align:center; }
+  .hist-name { font-family:'Cinzel',serif; font-size:13px; color:var(--gold-light); margin-bottom:3px; }
+  .hist-sub  { font-size:12px; font-style:italic; color:var(--text-dim); }
+  .hist-date { font-size:12px; color:var(--text-dim); font-style:italic; }
+  .hist-pts  { font-family:'Cinzel',serif; font-size:13px; color:var(--gold-light); text-align:right; }
+  .hist-pts.neg { color:#d98a40; }
+
+  .status-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 2px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .status-badge.completed { background:rgba(42,173,90,0.12); border:1px solid rgba(42,173,90,0.35); color:#2aad5a; }
+  .status-badge.failed    { background:rgba(217,64,64,0.12);  border:1px solid rgba(217,64,64,0.35);  color:#d94040; }
+  .status-badge.ongoing   { background:rgba(74,143,212,0.12); border:1px solid rgba(74,143,212,0.35); color:#4a8fd4; }
+
+  #history-list::-webkit-scrollbar       { width: 6px; }
+  #history-list::-webkit-scrollbar-track { background: transparent; }
+  #history-list::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+  #history-list::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+  /* ─── Tweaks Panel ─── */
+  #tweaks-panel {
+    display: none;
+    position: fixed; bottom: 24px; right: 24px; z-index: 1000;
+    background: #0f1128;
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 4px;
+    padding: 20px;
+    min-width: 240px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+  }
+  #tweaks-panel h3 {
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 11px;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .tweak-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 12px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+  }
+  .tweak-row select, .tweak-row input[type=color] {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 10px;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .tweak-row input[type=color] {
+    width: 40px; height: 24px; padding: 2px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="starfield"></div>
+<div class="glow-orb glow-orb-1"></div>
+<div class="glow-orb glow-orb-2"></div>
+<div class="glow-orb glow-orb-3"></div>
+
+<div class="wrapper">
+
+  <!-- ── BANNER ── -->
+  <div class="banner">
+    <div class="ornate-rule"><span>✦</span></div>
+    <p class="group-eyebrow">Casa Ravenclaw — Grupo de Facción</p>
+    <h1 class="group-name">Libertas et Orde</h1>
+    <p class="group-motto">"A través de la sabiduría y la libertad, nace el orden."</p>
+    <div class="house-badge">
+      <span style="color: var(--green-glow);">◆</span> Ravenclaw · 5 Miembros · Temporada III
+    </div>
+    <div class="ornate-rule" style="margin-top: 20px; margin-bottom: 0;"><span>✦</span></div>
+  </div>
+
+  <!-- ── MEMBERS ── -->
+  <p class="section-label">✦ &nbsp; Miembros &nbsp; ✦</p>
+  <div class="members-row">
+
+    <!-- Member 1 -->
+    <div class="member-card">
+      <div class="card-avatar-wrap">
+        <div class="avatar-placeholder">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="18" r="10" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M6 44c0-9.94 8.06-18 18-18s18 8.06 18 18" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <span>Retrato</span>
+        </div>
+        <div class="card-vignette"></div>
+      </div>
+      <div class="card-body">
+        <p class="card-role"><span class="card-house-pip"></span>Líder</p>
+        <p class="card-name">Evander Blackwood</p>
+        <p class="card-username">@evander_rp</p>
+        <div class="card-divider"></div>
+        <p class="card-desc">Un Ravenclaw de séptimo año con un conocimiento enciclopédico de las runas antiguas. Evander lidera a través del intelecto y la convicción silenciosa, no de la fuerza.</p>
+      </div>
+    </div>
+
+    <!-- Member 2 -->
+    <div class="member-card">
+      <div class="card-avatar-wrap">
+        <div class="avatar-placeholder">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="18" r="10" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M6 44c0-9.94 8.06-18 18-18s18 8.06 18 18" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <span>Retrato</span>
+        </div>
+        <div class="card-vignette"></div>
+      </div>
+      <div class="card-body">
+        <p class="card-role"><span class="card-house-pip"></span>Guardiana del Saber</p>
+        <p class="card-name">Seraphina Morrow</p>
+        <p class="card-username">@midnightink</p>
+        <div class="card-divider"></div>
+        <p class="card-desc">Guardiana de los grimorios ancestrales del Círculo. Habla poco, pero cuando lo hace, cada palabra lleva el peso de una trampa cuidadosamente tendida.</p>
+      </div>
+    </div>
+
+    <!-- Member 3 -->
+    <div class="member-card">
+      <div class="card-avatar-wrap">
+        <div class="avatar-placeholder">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="18" r="10" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M6 44c0-9.94 8.06-18 18-18s18 8.06 18 18" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <span>Retrato</span>
+        </div>
+        <div class="card-vignette"></div>
+      </div>
+      <div class="card-body">
+        <p class="card-role"><span class="card-house-pip"></span>Duelista</p>
+        <p class="card-name">Dorian Ashvale</p>
+        <p class="card-username">@serpent_quill</p>
+        <div class="card-divider"></div>
+        <p class="card-desc">Campeón de duelos del Círculo durante dos temporadas consecutivas. Dorian combate con una crueldad artística, convirtiendo cada duelo en un espectáculo digno de presenciar.</p>
+      </div>
+    </div>
+
+    <!-- Member 4 -->
+    <div class="member-card">
+      <div class="card-avatar-wrap">
+        <div class="avatar-placeholder">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="18" r="10" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M6 44c0-9.94 8.06-18 18-18s18 8.06 18 18" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <span>Retrato</span>
+        </div>
+        <div class="card-vignette"></div>
+      </div>
+      <div class="card-body">
+        <p class="card-role"><span class="card-house-pip"></span>Espía</p>
+        <p class="card-name">Isolde Thorne</p>
+        <p class="card-username">@thorneberry</p>
+        <div class="card-divider"></div>
+        <p class="card-desc">Isolde se mueve por Hogwarts como el humo: invisible, inaudible, e inolvidable solo tras las consecuencias de sus travesuras. Conoce los secretos de todos.</p>
+      </div>
+    </div>
+
+    <!-- Member 5 -->
+    <div class="member-card">
+      <div class="card-avatar-wrap">
+        <div class="avatar-placeholder">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="18" r="10" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M6 44c0-9.94 8.06-18 18-18s18 8.06 18 18" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <span>Retrato</span>
+        </div>
+        <div class="card-vignette"></div>
+      </div>
+      <div class="card-body">
+        <p class="card-role"><span class="card-house-pip"></span>Alquimista</p>
+        <p class="card-name">Callum Vex</p>
+        <p class="card-username">@ink_and_ash</p>
+        <div class="card-divider"></div>
+        <p class="card-desc">Mestizo con un talento obsesivo para las pociones. Callum provee al Círculo de brebajes experimentales que difuminan la línea entre la genialidad y la temeridad.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── GROUP STATS TABLE ── -->
+  <div class="stats-section">
+    <p class="section-label">✦ &nbsp; Estadísticas del Grupo &nbsp; ✦</p>
+
+    <div class="table-wrap">
+      <!-- Stat tiles row -->
+      <div style="display:grid; grid-template-columns: repeat(5, 1fr); border-bottom: 1px solid rgba(201,168,76,0.1);">
+
+        <div style="padding:20px 20px 16px; border-right:1px solid rgba(255,255,255,0.05); text-align:center;">
+          <div style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:8px;">Nivel</div>
+          <div style="font-family:'Cinzel',serif; font-size:32px; font-weight:700; color:var(--gold-light); line-height:1;">0</div>
+          <div style="margin-top:8px;">
+            <div style="width:100%; height:4px; background:rgba(255,255,255,0.07); border-radius:2px; overflow:hidden;">
+              <div style="width:0%; height:100%; background:linear-gradient(to right,var(--purple-glow),var(--gold)); border-radius:2px;"></div>
+            </div>
+            <div style="font-size:10px; color:var(--text-dim); margin-top:4px;">0 / — XP</div>
+          </div>
+        </div>
+
+        <div style="padding:20px 20px 16px; border-right:1px solid rgba(255,255,255,0.05); text-align:center;">
+          <div style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:8px;">Puntos</div>
+          <div style="font-family:'Cinzel',serif; font-size:32px; font-weight:700; color:var(--gold-light); line-height:1;">0</div>
+          <div style="font-size:10px; color:var(--text-dim); margin-top:8px;">puntos de grupo</div>
+        </div>
+
+        <div style="padding:20px 20px 16px; border-right:1px solid rgba(255,255,255,0.05); text-align:center;">
+          <div style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:8px;">⚡ Eventos</div>
+          <div style="font-family:'Cinzel',serif; font-size:32px; font-weight:700; color:var(--gold-light); line-height:1;">0</div>
+          <div style="font-size:10px; color:var(--text-dim); margin-top:8px;">participados</div>
+        </div>
+
+        <div style="padding:20px 20px 16px; border-right:1px solid rgba(255,255,255,0.05); text-align:center;">
+          <div style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:8px;">⚔️ Mazmorras</div>
+          <div style="font-family:'Cinzel',serif; font-size:32px; font-weight:700; color:var(--gold-light); line-height:1;">0</div>
+          <div style="font-size:10px; color:var(--text-dim); margin-top:8px;">completadas</div>
+        </div>
+
+        <div style="padding:20px 20px 16px; text-align:center;">
+          <div style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); margin-bottom:8px;">🏆 Conquistas</div>
+          <div style="font-family:'Cinzel',serif; font-size:32px; font-weight:700; color:var(--gold-light); line-height:1;">0</div>
+          <div style="font-size:10px; color:var(--text-dim); margin-top:8px;">desbloqueadas</div>
+        </div>
+
+      </div>
+
+      <!-- Active quest bar -->
+      <div style="padding:16px 28px; display:flex; align-items:center; gap:20px; background:rgba(61,32,128,0.08);">
+        <div style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); white-space:nowrap;">Misión Activa</div>
+        <div style="flex:1;" id="active-quest-bar">
+          <!-- filled by JS -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── ACHIEVEMENTS & BOOSTS ── -->
+  <div class="ab-section">
+
+
+    <div class="ab-card">
+      <p class="ab-title">✦ &nbsp; Mejoras</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;">
+
+        <!-- Combate -->
+        <div>
+          <div style="font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">⚔ &nbsp;Combate</div>
+          <div class="boosts-list" style="max-height:140px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--gold-dim) transparent; padding-right:4px;">
+            <div style="font-size:12px; color:var(--text-dim); font-style:italic; padding:8px 4px;">Sin mejoras activas.</div>
+            <!--
+            <div class="boost-item">
+              <div class="boost-icon">⚡</div>
+              <div class="boost-info">
+                <div class="boost-name">Descarga Arcana</div>
+                <div class="boost-desc">+25% XP en duelos mágicos</div>
+              </div>
+              <div class="boost-timer">2d 14h</div>
+            </div>
+            <div class="boost-item">
+              <div class="boost-icon">🛡️</div>
+              <div class="boost-info">
+                <div class="boost-name">Escudo Etéreo</div>
+                <div class="boost-desc">-15% daño recibido en combate grupal</div>
+              </div>
+              <div class="boost-timer expiring">0d 09h</div>
+            </div>
+            -->
+          </div>
+        </div>
+
+        <!-- Desarrollo -->
+        <div>
+          <div style="font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">📖 &nbsp;Desarrollo</div>
+          <div class="boosts-list" style="max-height:140px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--gold-dim) transparent; padding-right:4px;">
+            <div style="font-size:12px; color:var(--text-dim); font-style:italic; padding:8px 4px;">Sin mejoras activas.</div>
+            <!--
+            <div class="boost-item">
+              <div class="boost-icon">🔮</div>
+              <div class="boost-info">
+                <div class="boost-name">Perspicacia del Águila</div>
+                <div class="boost-desc">+15% a tiradas de conocimiento y lore</div>
+              </div>
+              <div class="boost-timer">5d 00h</div>
+            </div>
+            <div class="boost-item">
+              <div class="boost-icon">⚗️</div>
+              <div class="boost-info">
+                <div class="boost-name">Maestría Alquímica</div>
+                <div class="boost-desc">Elaboración de pociones doblada</div>
+              </div>
+              <div class="boost-timer">6d 22h</div>
+            </div>
+            -->
+          </div>
+        </div>
+
+        <!-- Exploración -->
+        <div>
+          <div style="font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">🗺 &nbsp;Exploración</div>
+          <div class="boosts-list" style="max-height:140px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--gold-dim) transparent; padding-right:4px;">
+            <div style="font-size:12px; color:var(--text-dim); font-style:italic; padding:8px 4px;">Sin mejoras activas.</div>
+            <!--
+            <div class="boost-item">
+              <div class="boost-icon">🌑</div>
+              <div class="boost-info">
+                <div class="boost-name">Velo de Sombras</div>
+                <div class="boost-desc">Misiones grupales con objetivos ocultos</div>
+              </div>
+              <div class="boost-timer">3d 12h</div>
+            </div>
+            -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ── POINTS HISTORY ── -->
+  <div class="history-section" style="margin-top: 16px; animation: fadeUp 0.8s ease both; animation-delay: 0.7s;">
+    <p class="section-label">✦ &nbsp; Historial de Puntos &nbsp; ✦</p>
+    <div class="table-wrap">
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 24px; border-bottom:1px solid rgba(201,168,76,0.15); background:rgba(61,32,128,0.15);">
+        <div style="display:flex; gap:24px; align-items:center;">
+          <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim);">Movimientos de Puntos</span>
+          <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; color:var(--text-dim); text-transform:uppercase;">0 registros</span>
+        </div>
+        <div style="font-family:'Cinzel',serif; font-size:11px; color:var(--gold); letter-spacing:1px;">
+          Total: <span style="color:var(--gold-light); font-weight:700;">+0</span>
+        </div>
+      </div>
+      <div id="points-history-list" style="max-height:300px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--gold-dim) transparent;">
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ADVENTURE HISTORY ── -->
+  <div class="history-section" style="margin-top: 16px; animation: fadeUp 0.8s ease both; animation-delay: 0.75s;">
+    <p class="section-label">✦ &nbsp; Historial de Aventuras &nbsp; ✦</p>
+
+    <div class="table-wrap">
+      <div style="display:flex; align-items:center; justify-content:space-between; padding: 14px 24px; border-bottom: 1px solid rgba(201,168,76,0.15); background: rgba(61,32,128,0.15);">
+        <div style="display:flex; gap:24px; align-items:center;">
+          <span class="th" style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim);">Todas las Expediciones</span>
+          <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; color:var(--text-dim); text-transform:uppercase;">0 registradas</span>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="hist-filter active" data-filter="all" onclick="filterHistory(this,'all')">Todas</button>
+          <button class="hist-filter" data-filter="completed" onclick="filterHistory(this,'completed')">Completadas</button>
+          <button class="hist-filter" data-filter="failed" onclick="filterHistory(this,'failed')">Fallidas</button>
+          <button class="hist-filter" data-filter="ongoing" onclick="filterHistory(this,'ongoing')">En Curso</button>
+        </div>
+      </div>
+
+      <!-- Scrollable list -->
+      <div id="history-list" style="max-height: 380px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--gold-dim) transparent;">
+        <!-- entries injected by JS -->
+      </div>
+    </div>
+  </div>
+
+</div><!-- /wrapper -->
+
+<!-- ── TWEAKS PANEL ── -->
+<div id="tweaks-panel">
+  <h3>Tweaks</h3>
+  <div class="tweak-row">
+    <span>Color de Casa</span>
+    <input type="color" id="tw-house-color" value="#2aad5a" onchange="applyTweaks()">
+  </div>
+  <div class="tweak-row">
+    <span>Acento Dorado</span>
+    <input type="color" id="tw-gold" value="#c9a84c" onchange="applyTweaks()">
+  </div>
+  <div class="tweak-row">
+    <span>Disposición</span>
+    <select id="tw-layout" onchange="applyTweaks()">
+      <option value="row">Fila Horizontal</option>
+      <option value="grid">Cuadrícula 2 col.</option>
+    </select>
+  </div>
+  <div class="tweak-row">
+    <span>Fondo</span>
+    <select id="tw-bg" onchange="applyTweaks()">
+      <option value="deep">Negro Medianoche</option>
+      <option value="navy">Azul Profundo</option>
+      <option value="plum">Ciruela Oscura</option>
+    </select>
+  </div>
+</div>
+
+<script>
+  // ── Points History ──
+  const pointsHistory = [
+    // Template entries — uncomment and fill in real data:
+    // { date: 'Abr 10, 1996', source: 'El Observatorio de Medianoche', type: 'Misión',   pts: +840  },
+    // { date: 'Mar 28, 1996', source: 'Ecos de los Fundadores',         type: 'Misión',   pts: +1200 },
+    // { date: 'Mar 20, 1996', source: 'Evento: Torneo de Ravenclaw',    type: 'Evento',   pts: +300  },
+    // { date: 'Feb 22, 1996', source: 'Mazmorra: Cripta del Eco',       type: 'Mazmorra', pts: +480  },
+    // { date: 'Feb 01, 1996', source: 'Bonificación semanal',           type: 'Bonus',    pts: +150  },
+    // { date: 'Feb 29, 1996', source: 'Prueba de la Puerta Invisible',  type: 'Misión',   pts: -200  },
+  ];
+
+  const typeColor = {
+    'Misión':   '#4a8fd4',
+    'Evento':   '#c9a84c',
+    'Mazmorra': '#9b59b6',
+    'Bonus':    '#2aad5a',
+    'Penaliz.': '#d94040',
+  };
+
+  const phList = document.getElementById('points-history-list');
+  if (pointsHistory.length === 0) {
+    phList.innerHTML = '<div style="padding:24px; text-align:center; font-size:13px; color:var(--text-dim); font-style:italic;">Sin registros de puntos aún.</div>';
+  }
+  phList.innerHTML += pointsHistory.map((p, i) => {
+    const isPos = p.pts >= 0;
+    const col = isPos ? '#2aad5a' : '#d94040';
+    const tc = typeColor[p.type] || 'var(--text-dim)';
+    return `<div style="display:grid; grid-template-columns:110px 1fr 90px 80px; align-items:center; gap:12px; padding:12px 24px; border-bottom:1px solid rgba(255,255,255,0.04); transition:background 0.2s;" onmouseover="this.style.background='rgba(61,32,128,0.12)'" onmouseout="this.style.background=''">
+      <span style="font-size:12px; color:var(--text-dim); font-style:italic;">${p.date}</span>
+      <span style="font-family:'EB Garamond',serif; font-size:14px; color:var(--text);">${p.source}</span>
+      <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:${tc}; background:${tc}18; border:1px solid ${tc}44; padding:2px 8px; border-radius:2px; text-align:center;">${p.type}</span>
+      <span style="font-family:'Cinzel',serif; font-size:14px; font-weight:700; color:${col}; text-align:right;">${isPos ? '+' : ''}${p.pts.toLocaleString('es-ES')}</span>
+    </div>`;
+  }).join('');
+
+  // webkit scrollbar for points list
+  const phStyle = document.createElement('style');
+  phStyle.textContent = '#points-history-list::-webkit-scrollbar{width:6px}#points-history-list::-webkit-scrollbar-track{background:transparent}#points-history-list::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px}#points-history-list::-webkit-scrollbar-thumb:hover{background:var(--gold)}';
+  document.head.appendChild(phStyle);
+
+  // ── Adventure History ──
+  const adventures = [
+    // Template entries — uncomment and fill in real data:
+    // { n:1,  name: "El Códice Prohibido",          sub: "Misión activa — ala de la Cámara de los Secretos", date: "En curso",     status: "ongoing",   pts: "+???" },
+    // { n:2,  name: "El Observatorio de Medianoche", sub: "Torre Astronómica, Temporada III",                 date: "Apr 10, 1996", status: "completed", pts: "+840" },
+    // { n:3,  name: "Ecos de los Fundadores",        sub: "Catacumbas profundas bajo Hogwarts",               date: "Mar 28, 1996", status: "completed", pts: "+1,200" },
+    // { n:4,  name: "Prueba de la Puerta Invisible", sub: "Misión colaborativa con la Casa Gryffindor",       date: "Feb 29, 1996", status: "failed",    pts: "−200" },
+  ];
+
+  let currentFilter = 'all';
+
+  function renderHistory(filter) {
+    const list = document.getElementById('history-list');
+    const filtered = filter === 'all' ? adventures : adventures.filter(a => a.status === filter);
+    if (filtered.length === 0) {
+      list.innerHTML = '<div style="padding:24px; text-align:center; font-size:13px; color:var(--text-dim); font-style:italic;">Sin aventuras registradas aún.</div>';
+      return;
+    }
+    list.innerHTML = filtered.map(a => `
+      <div class="hist-row">
+        <span class="hist-num">#${a.n}</span>
+        <div>
+          <div class="hist-name">${a.name}</div>
+          <div class="hist-sub">${a.sub}</div>
+        </div>
+        <span class="status-badge ${a.status}">${a.status}</span>
+        <span class="hist-date">${a.date}</span>
+        <span class="hist-pts ${a.pts.startsWith('−') ? 'neg' : ''}">${a.pts} pts</span>
+      </div>
+    `).join('');
+  }
+
+  function filterHistory(btn, filter) {
+    document.querySelectorAll('.hist-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderHistory(filter);
+  }
+
+  renderHistory('all');
+
+  // ── Active Quest from History ──
+  const ongoingQuest = adventures.find(a => a.status === 'ongoing') || adventures[0];
+  const questBar = document.getElementById('active-quest-bar');
+  if (ongoingQuest && questBar) {
+    questBar.innerHTML = `
+      <span style="font-family:'Cinzel',serif; font-size:14px; color:var(--gold-light); font-style:italic;">${ongoingQuest.name}</span>
+      <span style="font-size:11px; color:var(--text-dim); margin-left:16px; font-style:italic;">${ongoingQuest.sub}</span>`;
+  } else if (questBar) {
+    questBar.innerHTML = `<span style="font-size:13px; color:var(--text-dim); font-style:italic;">Sin misión activa.</span>`;
+  }
+
+  // ── Tweaks ──
+  window.addEventListener('message', e => {
+    if (e.data.type === '__activate_edit_mode')   document.getElementById('tweaks-panel').style.display = 'block';
+    if (e.data.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').style.display = 'none';
+  });
+  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "houseColor": "#4a8fd4",
+    "gold": "#c9a84c",
+    "layout": "row",
+    "bg": "plum"
+  }/*EDITMODE-END*/;
+
+  function applyTweaks() {
+    const hc = document.getElementById('tw-house-color').value;
+    const g  = document.getElementById('tw-gold').value;
+    const lay = document.getElementById('tw-layout').value;
+    const bg  = document.getElementById('tw-bg').value;
+
+    document.documentElement.style.setProperty('--green-glow', hc);
+    document.documentElement.style.setProperty('--gold', g);
+    document.documentElement.style.setProperty('--gold-light', shiftColor(g, 20));
+
+    document.querySelectorAll('.card-house-pip').forEach(p => {
+      p.style.background = hc;
+      p.style.boxShadow = `0 0 6px ${hc}`;
+    });
+
+    const row = document.querySelector('.members-row');
+    if (lay === 'grid') {
+      row.style.display = 'grid';
+      row.style.gridTemplateColumns = 'repeat(auto-fill, minmax(220px, 1fr))';
+    } else {
+      row.style.display = 'flex';
+      row.style.gridTemplateColumns = '';
+    }
+
+    const bgMap = { deep: '#07080f', navy: '#080e1f', plum: '#0c0816' };
+    document.body.style.background = bgMap[bg] || '#07080f';
+
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { houseColor: hc, gold: g, layout: lay, bg } }, '*');
+  }
+
+  function shiftColor(hex, amount) {
+    const r = Math.min(255, parseInt(hex.slice(1,3),16)+amount);
+    const g = Math.min(255, parseInt(hex.slice(3,5),16)+amount);
+    const b = Math.min(255, parseInt(hex.slice(5,7),16)+amount);
+    return `#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`;
+  }
+
+  // init tweaks from saved values
+  document.getElementById('tw-house-color').value = TWEAK_DEFAULTS.houseColor;
+  document.getElementById('tw-gold').value = TWEAK_DEFAULTS.gold;
+  document.getElementById('tw-layout').value = TWEAK_DEFAULTS.layout;
+  document.getElementById('tw-bg').value = TWEAK_DEFAULTS.bg;
+  applyTweaks();
+</script>
+</body>
+</html>
