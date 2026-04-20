@@ -168,7 +168,7 @@
     font-size: 11px;
     letter-spacing: 5px;
     text-transform: uppercase;
-    color: var(--gold-dim);
+    color: var(--gold);
     margin-bottom: 12px;
   }
   .group-name {
@@ -193,7 +193,7 @@
     display: inline-flex; align-items: center; gap: 8px;
     margin-top: 20px;
     padding: 6px 20px;
-    border: 1px solid var(--gold-dim);
+    border: 1px solid var(--gold);
     border-radius: 2px;
     font-family: 'Cinzel', serif;
     font-size: 12px;
@@ -209,7 +209,7 @@
     font-size: 11px;
     letter-spacing: 5px;
     text-transform: uppercase;
-    color: var(--gold-dim);
+    color: var(--gold);
     text-align: center;
     margin-bottom: 28px;
     animation: fadeUp 0.7s ease both;
@@ -406,7 +406,7 @@
     width: 32px; height: 32px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--purple), #1a0f40);
-    border: 1px solid var(--gold-dim);
+    border: 1px solid var(--gold);
     display: flex; align-items: center; justify-content: center;
     font-size: 14px;
     flex-shrink: 0;
@@ -644,7 +644,7 @@
     transition: all 0.2s;
   }
   .hist-filter:hover { border-color: rgba(201,168,76,0.4); color: var(--gold); }
-  .hist-filter.active { background: rgba(201,168,76,0.12); border-color: var(--gold-dim); color: var(--gold-light); }
+  .hist-filter.active { background: rgba(201,168,76,0.12); border-color: var(--gold); color: var(--gold-light); }
 
   .hist-row {
     display: grid;
@@ -681,7 +681,7 @@
 
   #history-list::-webkit-scrollbar       { width: 6px; }
   #history-list::-webkit-scrollbar-track { background: transparent; }
-  #history-list::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+  #history-list::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
   #history-list::-webkit-scrollbar-thumb:hover { background: var(--gold); }
 
   /* ─── Tweaks Panel ─── */
@@ -709,7 +709,7 @@
   .tweak-row {
     display: flex; justify-content: space-between; align-items: center;
     margin-bottom: 12px;
-    color: var(--text-dim);
+    color: var(--silver);
     letter-spacing: 1px;
   }
   .tweak-row select, .tweak-row input[type=color] {
@@ -876,7 +876,7 @@
 
       <!-- Active quest bar -->
       <div style="padding:16px 28px; display:flex; align-items:center; gap:20px; background:rgba(61,32,128,0.08);">
-        <div style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim); white-space:nowrap;">Misión Activa</div>
+        <div style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); white-space:nowrap;">Misión Activa</div>
         <div style="flex:1;" id="active-quest-bar">
           <!-- filled by JS -->
         </div>
@@ -896,8 +896,8 @@
         <!-- Combate -->
         <div>
           <div style="font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">⚔ &nbsp;Combate</div>
-          <div class="boosts-list" style="max-height:140px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--gold-dim) transparent; padding-right:4px;">
-            <div style="font-size:12px; color:var(--text-dim); font-style:italic; padding:8px 4px;">Sin mejoras activas.</div>
+          <div class="boosts-list" style="max-height:140px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--gold) transparent; padding-right:4px;">
+            <div style="font-size:12px; color:var(--silver); font-style:italic; padding:8px 4px;">Sin mejoras activas.</div>
             <!--
             <div class="boost-item">
               <div class="boost-icon">⚡</div>
@@ -922,8 +922,8 @@
         <!-- Desarrollo -->
         <div>
           <div style="font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">📖 &nbsp;Desarrollo</div>
-          <div class="boosts-list" style="max-height:140px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--gold-dim) transparent; padding-right:4px;">
-            <div style="font-size:12px; color:var(--text-dim); font-style:italic; padding:8px 4px;">Sin mejoras activas.</div>
+          <div class="boosts-list" style="max-height:140px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--gold) transparent; padding-right:4px;">
+            <div style="font-size:12px; color:var(--silver); font-style:italic; padding:8px 4px;">Sin mejoras activas.</div>
             <!--
             <div class="boost-item">
               <div class="boost-icon">🔮</div>
@@ -948,8 +948,8 @@
         <!-- Exploración -->
         <div>
           <div style="font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">🗺 &nbsp;Exploración</div>
-          <div class="boosts-list" style="max-height:140px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--gold-dim) transparent; padding-right:4px;">
-            <div style="font-size:12px; color:var(--text-dim); font-style:italic; padding:8px 4px;">Sin mejoras activas.</div>
+          <div class="boosts-list" style="max-height:140px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--gold) transparent; padding-right:4px;">
+            <div style="font-size:12px; color:var(--silver); font-style:italic; padding:8px 4px;">Sin mejoras activas.</div>
             <!--
             <div class="boost-item">
               <div class="boost-icon">🌑</div>
@@ -982,7 +982,7 @@
           Total: <span style="color:var(--gold-light); font-weight:700;">+0</span>
         </div>
       </div>
-      <div id="points-history-list" style="max-height:300px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--gold-dim) transparent;">
+      <div id="points-history-list" style="max-height:300px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--gold) transparent;">
       </div>
     </div>
   </div>
@@ -1006,7 +1006,7 @@
       </div>
 
       <!-- Scrollable list -->
-      <div id="history-list" style="max-height: 380px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--gold-dim) transparent;">
+      <div id="history-list" style="max-height: 380px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--gold) transparent;">
         <!-- entries injected by JS -->
       </div>
     </div>
@@ -1069,9 +1069,9 @@
   phList.innerHTML += pointsHistory.map((p, i) => {
     const isPos = p.pts >= 0;
     const col = isPos ? '#2aad5a' : '#d94040';
-    const tc = typeColor[p.type] || 'var(--text-dim)';
+    const tc = typeColor[p.type] || 'var(--silver)';
     return `<div style="display:grid; grid-template-columns:110px 1fr 90px 80px; align-items:center; gap:12px; padding:12px 24px; border-bottom:1px solid rgba(255,255,255,0.04); transition:background 0.2s;" onmouseover="this.style.background='rgba(61,32,128,0.12)'" onmouseout="this.style.background=''">
-      <span style="font-size:12px; color:var(--text-dim); font-style:italic;">${p.date}</span>
+      <span style="font-size:12px; color:var(--silver); font-style:italic;">${p.date}</span>
       <span style="font-family:'EB Garamond',serif; font-size:14px; color:var(--text);">${p.source}</span>
       <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:${tc}; background:${tc}18; border:1px solid ${tc}44; padding:2px 8px; border-radius:2px; text-align:center;">${p.type}</span>
       <span style="font-family:'Cinzel',serif; font-size:14px; font-weight:700; color:${col}; text-align:right;">${isPos ? '+' : ''}${p.pts.toLocaleString('es-ES')}</span>
@@ -1080,7 +1080,7 @@
 
   // webkit scrollbar for points list
   const phStyle = document.createElement('style');
-  phStyle.textContent = '#points-history-list::-webkit-scrollbar{width:6px}#points-history-list::-webkit-scrollbar-track{background:transparent}#points-history-list::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px}#points-history-list::-webkit-scrollbar-thumb:hover{background:var(--gold)}';
+  phStyle.textContent = '#points-history-list::-webkit-scrollbar{width:6px}#points-history-list::-webkit-scrollbar-track{background:transparent}#points-history-list::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}#points-history-list::-webkit-scrollbar-thumb:hover{background:var(--gold)}';
   document.head.appendChild(phStyle);
 
   // ── Adventure History ──
@@ -1129,7 +1129,7 @@
   if (ongoingQuest && questBar) {
     questBar.innerHTML = `
       <span style="font-family:'Cinzel',serif; font-size:14px; color:var(--gold-light); font-style:italic;">${ongoingQuest.name}</span>
-      <span style="font-size:11px; color:var(--text-dim); margin-left:16px; font-style:italic;">${ongoingQuest.sub}</span>`;
+      <span style="font-size:11px; color:var(--silver); margin-left:16px; font-style:italic;">${ongoingQuest.sub}</span>`;
   } else if (questBar) {
     questBar.innerHTML = `<span style="font-size:13px; color:var(--silver); font-style:italic;">Sin misión activa.</span>`;
   }
