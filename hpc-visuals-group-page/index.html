@@ -973,8 +973,8 @@
     <div class="table-wrap">
       <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 24px; border-bottom:1px solid rgba(201,168,76,0.15); background:rgba(61,32,128,0.15);">
         <div style="display:flex; gap:24px; align-items:center;">
-          <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim);">Movimientos de Puntos</span>
-          <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; color:var(--text-dim); text-transform:uppercase;">0 registros</span>
+          <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold);">Movimientos de Puntos</span>
+          <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; color:var(--silver); text-transform:uppercase;">0 registros</span>
         </div>
         <div style="font-family:'Cinzel',serif; font-size:11px; color:var(--gold); letter-spacing:1px;">
           Total: <span style="color:var(--gold-light); font-weight:700;">+0</span>
@@ -992,8 +992,8 @@
     <div class="table-wrap">
       <div style="display:flex; align-items:center; justify-content:space-between; padding: 14px 24px; border-bottom: 1px solid rgba(201,168,76,0.15); background: rgba(61,32,128,0.15);">
         <div style="display:flex; gap:24px; align-items:center;">
-          <span class="th" style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-dim);">Todas las Expediciones</span>
-          <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; color:var(--text-dim); text-transform:uppercase;">0 registradas</span>
+          <span class="th" style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold);">Todas las Expediciones</span>
+          <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; color:var(--silver); text-transform:uppercase;">0 registradas</span>
         </div>
         <div style="display:flex; gap:8px;">
           <button class="hist-filter active" data-filter="all" onclick="filterHistory(this,'all')">Todas</button>
@@ -1062,7 +1062,7 @@
 
   const phList = document.getElementById('points-history-list');
   if (pointsHistory.length === 0) {
-    phList.innerHTML = '<div style="padding:24px; text-align:center; font-size:13px; color:var(--text-dim); font-style:italic;">Sin registros de puntos aún.</div>';
+    phList.innerHTML = '<div style="padding:24px; text-align:center; font-size:13px; color:var(--silver); font-style:italic;">Sin registros de puntos aún.</div>';
   }
   phList.innerHTML += pointsHistory.map((p, i) => {
     const isPos = p.pts >= 0;
@@ -1096,7 +1096,7 @@
     const list = document.getElementById('history-list');
     const filtered = filter === 'all' ? adventures : adventures.filter(a => a.status === filter);
     if (filtered.length === 0) {
-      list.innerHTML = '<div style="padding:24px; text-align:center; font-size:13px; color:var(--text-dim); font-style:italic;">Sin aventuras registradas aún.</div>';
+      list.innerHTML = '<div style="padding:24px; text-align:center; font-size:13px; color:var(--silver); font-style:italic;">Sin aventuras registradas aún.</div>';
       return;
     }
     list.innerHTML = filtered.map(a => `
