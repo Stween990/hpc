@@ -977,10 +977,10 @@
       <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 24px; border-bottom:1px solid rgba(201,168,76,0.15); background:rgba(61,32,128,0.15);">
         <div style="display:flex; gap:24px; align-items:center;">
           <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold);">Movimientos de Puntos</span>
-          <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; color:var(--silver); text-transform:uppercase;">0 registros</span>
+          <span id="points-count" style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; color:var(--silver); text-transform:uppercase;">0 registros</span>
         </div>
         <div style="font-family:'Cinzel',serif; font-size:11px; color:var(--gold); letter-spacing:1px;">
-          Total: <span style="color:var(--gold-light); font-weight:700;">+0</span>
+          Total: <span id="points-total" style="color:var(--gold-light); font-weight:700;">+0</span>
         </div>
       </div>
       <div id="points-history-list" style="max-height:300px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--gold) transparent;">
@@ -1053,8 +1053,8 @@
   };
 
   const eventos = [
-    { name: "La Tormenta Azul",   url: "https://hpc.forumcommunity.net/?t=63458722#entry472046184" },
-    { name: "Evento de Apertura", url: "https://hpc.forumcommunity.net/?t=63456086" },
+    { name: "La Tormenta Azul",   date: "Abr 2026", pts: 5, url: "https://hpc.forumcommunity.net/?t=63458722#entry472046184" },
+    { name: "Evento de Apertura", date: "Abr 2026", pts: 5, url: "https://hpc.forumcommunity.net/?t=63456086" },
   ];
 
   // Requirements to advance from Nivel N → N+1 (index = current level)
@@ -1065,21 +1065,25 @@
     { pg: 80, aventuras: 18, eventos: 10, mazmorras: 5, conquistas: 3 },
   ];
 
-  // ── Points History ──
+  // ── Adventure History ──
+  const adventures = [
+    { n:1, name: "Todos para uno y uno para todos", sub: "", date: "20 Abr 2026", status: "completed", pts: 5, url: "https://hpc.forumcommunity.net/?t=63456565#entry472000254" },
+    { n:2, name: "Rumores en Hogwarts",             sub: "", date: "21 Abr 2026", status: "completed", pts: 5, url: "https://hpc.forumcommunity.net/?t=63456565#entry472013686" },
+  ];
+
+  // ── Points History (derived from eventos + adventures, plus any manual entries) ──
   const pointsHistory = [
-    // Template entries — uncomment and fill in real data:
-    // { date: 'Abr 10, 1996', source: 'El Observatorio de Medianoche', type: 'Misión',   pts: +840  },
-    // { date: 'Mar 28, 1996', source: 'Ecos de los Fundadores',         type: 'Misión',   pts: +1200 },
-    // { date: 'Mar 20, 1996', source: 'Evento: Torneo de Ravenclaw',    type: 'Evento',   pts: +300  },
-    // { date: 'Feb 22, 1996', source: 'Mazmorra: Cripta del Eco',       type: 'Mazmorra', pts: +480  },
-    // { date: 'Feb 01, 1996', source: 'Bonificación semanal',           type: 'Bonus',    pts: +150  },
-    // { date: 'Feb 29, 1996', source: 'Prueba de la Puerta Invisible',  type: 'Misión',   pts: -200  },
+    ...eventos.map(e   => ({ date: e.date, source: e.name, type: 'Evento',   pts: e.pts, url: e.url })),
+    ...adventures.filter(a => a.status !== 'ongoing').map(a => ({ date: a.date, source: a.name, type: 'Aventura', pts: a.pts, url: a.url })),
+    // Manual entries (mazmorras, conquistas, combates, bonus, penalizaciones) go here:
   ];
 
   const typeColor = {
-    'Misión':   '#4a8fd4',
+    'Aventura': '#4a8fd4',
     'Evento':   '#c9a84c',
     'Mazmorra': '#9b59b6',
+    'Conquista':'#e07a3c',
+    'Combate':  '#7a8fa8',
     'Bonus':    '#2aad5a',
     'Penaliz.': '#d94040',
   };
@@ -1087,29 +1091,34 @@
   const phList = document.getElementById('points-history-list');
   if (pointsHistory.length === 0) {
     phList.innerHTML = '<div style="padding:24px; text-align:center; font-size:13px; color:var(--silver); font-style:italic;">Sin registros de puntos aún.</div>';
+  } else {
+    phList.innerHTML = pointsHistory.map(p => {
+      const isPos = p.pts >= 0;
+      const col = isPos ? '#2aad5a' : '#d94040';
+      const tc = typeColor[p.type] || 'var(--silver)';
+      const tag = p.url ? 'a' : 'div';
+      const linkAttrs = p.url ? `href="${p.url}" target="_blank" rel="noopener"` : '';
+      return `<${tag} ${linkAttrs} style="display:grid; grid-template-columns:110px 1fr 90px 80px; align-items:center; gap:12px; padding:12px 24px; border-bottom:1px solid rgba(255,255,255,0.04); transition:background 0.2s; text-decoration:none; color:inherit;" onmouseover="this.style.background='rgba(61,32,128,0.12)'" onmouseout="this.style.background=''">
+        <span style="font-size:12px; color:var(--silver); font-style:italic;">${p.date}</span>
+        <span style="font-family:'EB Garamond',serif; font-size:14px; color:var(--text);">${p.source}</span>
+        <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:${tc}; background:${tc}18; border:1px solid ${tc}44; padding:2px 8px; border-radius:2px; text-align:center;">${p.type}</span>
+        <span style="font-family:'Cinzel',serif; font-size:14px; font-weight:700; color:${col}; text-align:right;">${isPos ? '+' : ''}${p.pts.toLocaleString('es-ES')}</span>
+      </${tag}>`;
+    }).join('');
   }
-  phList.innerHTML += pointsHistory.map((p, i) => {
-    const isPos = p.pts >= 0;
-    const col = isPos ? '#2aad5a' : '#d94040';
-    const tc = typeColor[p.type] || 'var(--silver)';
-    return `<div style="display:grid; grid-template-columns:110px 1fr 90px 80px; align-items:center; gap:12px; padding:12px 24px; border-bottom:1px solid rgba(255,255,255,0.04); transition:background 0.2s;" onmouseover="this.style.background='rgba(61,32,128,0.12)'" onmouseout="this.style.background=''">
-      <span style="font-size:12px; color:var(--silver); font-style:italic;">${p.date}</span>
-      <span style="font-family:'EB Garamond',serif; font-size:14px; color:var(--text);">${p.source}</span>
-      <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:${tc}; background:${tc}18; border:1px solid ${tc}44; padding:2px 8px; border-radius:2px; text-align:center;">${p.type}</span>
-      <span style="font-family:'Cinzel',serif; font-size:14px; font-weight:700; color:${col}; text-align:right;">${isPos ? '+' : ''}${p.pts.toLocaleString('es-ES')}</span>
-    </div>`;
-  }).join('');
+
+  const pointsCount = document.getElementById('points-count');
+  if (pointsCount) pointsCount.textContent = `${pointsHistory.length} registro${pointsHistory.length === 1 ? '' : 's'}`;
+  const pointsTotalEl = document.getElementById('points-total');
+  if (pointsTotalEl) {
+    const total = pointsHistory.reduce((s, p) => s + p.pts, 0);
+    pointsTotalEl.textContent = `${total >= 0 ? '+' : ''}${total.toLocaleString('es-ES')}`;
+  }
 
   // webkit scrollbar for points list
   const phStyle = document.createElement('style');
   phStyle.textContent = '#points-history-list::-webkit-scrollbar{width:6px}#points-history-list::-webkit-scrollbar-track{background:transparent}#points-history-list::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}#points-history-list::-webkit-scrollbar-thumb:hover{background:var(--gold)}';
   document.head.appendChild(phStyle);
-
-  // ── Adventure History ──
-  const adventures = [
-    { n:1, name: "Todos para uno y uno para todos", sub: "", date: "20 Abr 2026", status: "completed", pts: "—", url: "https://hpc.forumcommunity.net/?t=63456565#entry472000254" },
-    { n:2, name: "Rumores en Hogwarts",             sub: "", date: "21 Abr 2026", status: "completed", pts: "—", url: "https://hpc.forumcommunity.net/?t=63456565#entry472013686" },
-  ];
 
   let currentFilter = 'all';
 
@@ -1123,6 +1132,9 @@
     list.innerHTML = filtered.map(a => {
       const tag = a.url ? 'a' : 'div';
       const attrs = a.url ? `href="${a.url}" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;"` : '';
+      const ptsNum = typeof a.pts === 'number' ? a.pts : parseFloat(a.pts);
+      const isNeg = ptsNum < 0;
+      const ptsStr = Number.isFinite(ptsNum) ? `${isNeg ? '' : '+'}${ptsNum}` : a.pts;
       return `
       <${tag} class="hist-row" ${attrs}>
         <span class="hist-num">#${a.n}</span>
@@ -1132,7 +1144,7 @@
         </div>
         <span class="status-badge ${a.status}">${a.status}</span>
         <span class="hist-date">${a.date}</span>
-        <span class="hist-pts ${a.pts.startsWith('−') ? 'neg' : ''}">${a.pts} pts</span>
+        <span class="hist-pts ${isNeg ? 'neg' : ''}">${ptsStr} pts</span>
       </${tag}>
     `;
     }).join('');
