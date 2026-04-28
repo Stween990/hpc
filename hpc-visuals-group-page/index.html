@@ -839,36 +839,37 @@
 
         <div style="padding:20px 20px 16px; border-right:1px solid rgba(255,255,255,0.05); text-align:center;">
           <div style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">Nivel</div>
-          <div style="font-family:'Cinzel',serif; font-size:32px; font-weight:700; color:var(--gold-light); line-height:1;">0</div>
+          <div id="stat-nivel" style="font-family:'Cinzel',serif; font-size:32px; font-weight:700; color:var(--gold-light); line-height:1;">0</div>
           <div style="margin-top:8px;">
             <div style="width:100%; height:4px; background:rgba(255,255,255,0.07); border-radius:2px; overflow:hidden;">
-              <div style="width:0%; height:100%; background:linear-gradient(to right,var(--purple-glow),var(--gold)); border-radius:2px;"></div>
+              <div id="level-bar-fill" style="width:0%; height:100%; background:linear-gradient(to right,var(--purple-glow),var(--gold)); border-radius:2px; transition:width 0.6s ease;"></div>
             </div>
-            <div style="font-size:10px; color:var(--silver); margin-top:4px;">0 / — XP</div>
+            <div id="level-bar-text" style="font-size:10px; color:var(--silver); margin-top:4px;">0 / —</div>
           </div>
         </div>
 
         <div style="padding:20px 20px 16px; border-right:1px solid rgba(255,255,255,0.05); text-align:center;">
           <div style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">Puntos</div>
-          <div style="font-family:'Cinzel',serif; font-size:32px; font-weight:700; color:var(--gold-light); line-height:1;">0</div>
+          <div id="stat-puntos" style="font-family:'Cinzel',serif; font-size:32px; font-weight:700; color:var(--gold-light); line-height:1;">0</div>
           <div style="font-size:10px; color:var(--silver); margin-top:8px;">puntos de grupo</div>
         </div>
 
         <div style="padding:20px 20px 16px; border-right:1px solid rgba(255,255,255,0.05); text-align:center;">
           <div style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">⚡ Eventos</div>
-          <div style="font-family:'Cinzel',serif; font-size:32px; font-weight:700; color:var(--gold-light); line-height:1;">0</div>
+          <div id="stat-eventos" style="font-family:'Cinzel',serif; font-size:32px; font-weight:700; color:var(--gold-light); line-height:1;">0</div>
           <div style="font-size:10px; color:var(--silver); margin-top:8px;">participados</div>
+          <div id="eventos-list" style="margin-top:10px; display:flex; flex-direction:column; gap:4px;"></div>
         </div>
 
         <div style="padding:20px 20px 16px; border-right:1px solid rgba(255,255,255,0.05); text-align:center;">
           <div style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">⚔️ Mazmorras</div>
-          <div style="font-family:'Cinzel',serif; font-size:32px; font-weight:700; color:var(--gold-light); line-height:1;">0</div>
+          <div id="stat-mazmorras" style="font-family:'Cinzel',serif; font-size:32px; font-weight:700; color:var(--gold-light); line-height:1;">0</div>
           <div style="font-size:10px; color:var(--silver); margin-top:8px;">completadas</div>
         </div>
 
         <div style="padding:20px 20px 16px; text-align:center;">
           <div style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">🏆 Conquistas</div>
-          <div style="font-family:'Cinzel',serif; font-size:32px; font-weight:700; color:var(--gold-light); line-height:1;">0</div>
+          <div id="stat-conquistas" style="font-family:'Cinzel',serif; font-size:32px; font-weight:700; color:var(--gold-light); line-height:1;">0</div>
           <div style="font-size:10px; color:var(--silver); margin-top:8px;">desbloqueadas</div>
         </div>
 
@@ -995,7 +996,7 @@
       <div style="display:flex; align-items:center; justify-content:space-between; padding: 14px 24px; border-bottom: 1px solid rgba(201,168,76,0.15); background: rgba(61,32,128,0.15);">
         <div style="display:flex; gap:24px; align-items:center;">
           <span class="th" style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold);">Todas las Expediciones</span>
-          <span style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; color:var(--silver); text-transform:uppercase;">0 registradas</span>
+          <span id="adventure-count" style="font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; color:var(--silver); text-transform:uppercase;">0 registradas</span>
         </div>
         <div style="display:flex; gap:8px;">
           <button class="hist-filter active" data-filter="all" onclick="filterHistory(this,'all')">Todas</button>
@@ -1043,6 +1044,27 @@
 </div>
 
 <script>
+  // ── Group State ──
+  const groupState = {
+    level: 0,
+    pg: 20,
+    mazmorras: 0,
+    conquistas: 0,
+  };
+
+  const eventos = [
+    { name: "La Tormenta Azul",   url: "https://hpc.forumcommunity.net/?t=63458722#entry472046184" },
+    { name: "Evento de Apertura", url: "https://hpc.forumcommunity.net/?t=63456086" },
+  ];
+
+  // Requirements to advance from Nivel N → N+1 (index = current level)
+  const levelTiers = [
+    { pg: 20, aventuras: 4,  eventos: 2,  mazmorras: 0, conquistas: 0 },
+    { pg: 40, aventuras: 8,  eventos: 4,  mazmorras: 1, conquistas: 0 },
+    { pg: 60, aventuras: 12, eventos: 6,  mazmorras: 3, conquistas: 1 },
+    { pg: 80, aventuras: 18, eventos: 10, mazmorras: 5, conquistas: 3 },
+  ];
+
   // ── Points History ──
   const pointsHistory = [
     // Template entries — uncomment and fill in real data:
@@ -1085,11 +1107,8 @@
 
   // ── Adventure History ──
   const adventures = [
-    // Template entries — uncomment and fill in real data:
-    // { n:1,  name: "El Códice Prohibido",          sub: "Misión activa — ala de la Cámara de los Secretos", date: "En curso",     status: "ongoing",   pts: "+???" },
-    // { n:2,  name: "El Observatorio de Medianoche", sub: "Torre Astronómica, Temporada III",                 date: "Apr 10, 1996", status: "completed", pts: "+840" },
-    // { n:3,  name: "Ecos de los Fundadores",        sub: "Catacumbas profundas bajo Hogwarts",               date: "Mar 28, 1996", status: "completed", pts: "+1,200" },
-    // { n:4,  name: "Prueba de la Puerta Invisible", sub: "Misión colaborativa con la Casa Gryffindor",       date: "Feb 29, 1996", status: "failed",    pts: "−200" },
+    { n:1, name: "Todos para uno y uno para todos", sub: "", date: "20 Abr 2026", status: "completed", pts: "—", url: "https://hpc.forumcommunity.net/?t=63456565#entry472000254" },
+    { n:2, name: "Rumores en Hogwarts",             sub: "", date: "21 Abr 2026", status: "completed", pts: "—", url: "https://hpc.forumcommunity.net/?t=63456565#entry472013686" },
   ];
 
   let currentFilter = 'all';
@@ -1101,18 +1120,22 @@
       list.innerHTML = '<div style="padding:24px; text-align:center; font-size:13px; color:var(--silver); font-style:italic;">Sin aventuras registradas aún.</div>';
       return;
     }
-    list.innerHTML = filtered.map(a => `
-      <div class="hist-row">
+    list.innerHTML = filtered.map(a => {
+      const tag = a.url ? 'a' : 'div';
+      const attrs = a.url ? `href="${a.url}" target="_blank" rel="noopener" style="text-decoration:none; color:inherit;"` : '';
+      return `
+      <${tag} class="hist-row" ${attrs}>
         <span class="hist-num">#${a.n}</span>
         <div>
           <div class="hist-name">${a.name}</div>
-          <div class="hist-sub">${a.sub}</div>
+          ${a.sub ? `<div class="hist-sub">${a.sub}</div>` : ''}
         </div>
         <span class="status-badge ${a.status}">${a.status}</span>
         <span class="hist-date">${a.date}</span>
         <span class="hist-pts ${a.pts.startsWith('−') ? 'neg' : ''}">${a.pts} pts</span>
-      </div>
-    `).join('');
+      </${tag}>
+    `;
+    }).join('');
   }
 
   function filterHistory(btn, filter) {
@@ -1123,8 +1146,45 @@
 
   renderHistory('all');
 
+  const advCount = document.getElementById('adventure-count');
+  if (advCount) advCount.textContent = `${adventures.length} registrada${adventures.length === 1 ? '' : 's'}`;
+
+  // ── Render Group Stats ──
+  (function renderGroupStats() {
+    const aventurasN = adventures.length;
+    const eventosN   = eventos.length;
+
+    document.getElementById('stat-nivel').textContent      = groupState.level;
+    document.getElementById('stat-puntos').textContent     = groupState.pg;
+    document.getElementById('stat-eventos').textContent    = eventosN;
+    document.getElementById('stat-mazmorras').textContent  = groupState.mazmorras;
+    document.getElementById('stat-conquistas').textContent = groupState.conquistas;
+
+    const eventosList = document.getElementById('eventos-list');
+    eventosList.innerHTML = eventos.map(e => `
+      <a href="${e.url}" target="_blank" rel="noopener"
+         style="font-size:10px; color:var(--silver); text-decoration:none; font-style:italic; transition:color 0.2s;"
+         onmouseover="this.style.color='var(--gold-light)'"
+         onmouseout="this.style.color='var(--silver)'">· ${e.name}</a>
+    `).join('');
+
+    const tier = levelTiers[groupState.level];
+    const fillEl = document.getElementById('level-bar-fill');
+    const textEl = document.getElementById('level-bar-text');
+    if (tier) {
+      const have = groupState.pg + aventurasN + eventosN + groupState.mazmorras + groupState.conquistas;
+      const need = tier.pg + tier.aventuras + tier.eventos + tier.mazmorras + tier.conquistas;
+      const pct  = Math.min(100, (have / need) * 100);
+      fillEl.style.width = pct.toFixed(1) + '%';
+      textEl.textContent = `${have} / ${need} a Nv ${groupState.level + 1}`;
+    } else {
+      fillEl.style.width = '100%';
+      textEl.textContent = 'Nivel máximo';
+    }
+  })();
+
   // ── Active Quest from History ──
-  const ongoingQuest = adventures.find(a => a.status === 'ongoing') || adventures[0];
+  const ongoingQuest = adventures.find(a => a.status === 'ongoing');
   const questBar = document.getElementById('active-quest-bar');
   if (ongoingQuest && questBar) {
     questBar.innerHTML = `
